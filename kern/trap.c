@@ -73,12 +73,13 @@ void segnp_entry();
 void stack_entry();
 void gpflt_entry();
 void pgflt_entry();
-void fperr_entry();
-void align_entry();
-void mchk_entry();
-void simderr_entry();
-void syscall_entry();
 
+void t_fperr();
+void t_align();
+void t_mchk();
+void t_simderr();
+
+void t_syscall();
 
 void
 trap_init(void)
@@ -100,11 +101,12 @@ trap_init(void)
         SETGATE(idt[T_STACK], 0, GD_KT, stack_entry, 0);
         SETGATE(idt[T_GPFLT], 0, GD_KT, gpflt_entry, 0);
         SETGATE(idt[T_PGFLT], 0, GD_KT, pgflt_entry, 0);
-        SETGATE(idt[T_FPERR], 0, GD_KT, fperr_entry, 0);
-        SETGATE(idt[T_ALIGN], 0, GD_KT, align_entry, 0);
-        SETGATE(idt[T_MCHK], 0, GD_KT, mchk_entry, 0);
-        SETGATE(idt[T_SIMDERR], 0, GD_KT, simderr_entry, 0);
-        SETGATE(idt[T_SYSCALL], 0, GD_KT, syscall_entry, 3);
+	SETGATE(idt[T_FPERR], 0, GD_KT, t_fperr, 0);
+        SETGATE(idt[T_ALIGN], 0, GD_KT, t_align, 0);
+        SETGATE(idt[T_MCHK], 0, GD_KT, t_mchk, 0);
+        SETGATE(idt[T_SIMDERR], 0, GD_KT, t_simderr, 0);
+
+        SETGATE(idt[T_SYSCALL], 0, GD_KT, t_syscall, 3);
 	// Per-CPU setup 
 	trap_init_percpu();
 }
