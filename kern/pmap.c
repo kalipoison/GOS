@@ -304,6 +304,23 @@ page_init(void)
 	// Change the code to reflect this.
 	// NB: DO NOT actually touch the physical memory corresponding to
 	// free pages!
+	cprintf("Init pages alloc...\n");
+
+	size_t i;
+	for (i = 1; i < npages_basemem; i++) {
+		if (i * PGSIZE != MPENTRY_PADDR){
+			pages[i].pp_ref = 0;
+			pages[i].pp_link = page_free_list;
+			page_free_list = &pages[i];
+		}
+	}
+
+	for (i = PGNUM(PADDR(boot_alloc(0))); i < npages; i++) {
+		pages[i].pp_ref = 0;
+		pages[i].pp_link = page_free_list;
+		page_free_list = &pages[i];
+	}
+	/**
 	size_t i;
 	page_free_list = NULL;
 	// the page number of the extmem area has been used
@@ -326,6 +343,7 @@ page_init(void)
 			page_free_list = &pages[i];
 		}
 	}
+	**/
 }
 
 //
