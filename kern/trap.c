@@ -284,6 +284,8 @@ trap_dispatch(struct Trapframe *tf)
 	if (tf->tf_trapno == IRQ_OFFSET + IRQ_TIMER) {
 		// lab4 exercise 14
 		lapic_eoi();
+		if (thiscpu->cpu_id == 0)
+			time_tick();
 		sched_yield();
 		return;
 	}
