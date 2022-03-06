@@ -24,7 +24,6 @@ pgfault(struct UTrapframe *utf)
 	//   Use the read-only page table mappings at uvpt
 	//   (see <inc/memlayout.h>).
 
-	// LAB 4: Your code here.
 	if (!((err & FEC_WR) && (uvpd[PDX(addr)] & PTE_P)
 			&& (uvpt[PGNUM(addr)] & PTE_COW) && (uvpt[PGNUM(addr)] & PTE_P)))
 		panic("page cow check failed");
@@ -34,7 +33,6 @@ pgfault(struct UTrapframe *utf)
 	// Hint:
 	//   You should make three system calls.
 	addr = ROUNDDOWN(addr, PGSIZE);
-	// LAB 4: Your code here.
 	if ((r = sys_page_alloc(0, PFTEMP, PTE_P|PTE_U|PTE_W)))
 		panic("sys_page_alloc: %e", r);
 
@@ -65,7 +63,6 @@ duppage(envid_t envid, unsigned pn)
 {
 	int r;
 
-	// LAB 4: Your code here.
 	//panic("duppage not implemented");
 	void *addr = (void *)(pn * PGSIZE);
 	if (uvpt[pn] & PTE_SHARE) {
@@ -104,7 +101,6 @@ duppage(envid_t envid, unsigned pn)
 envid_t
 fork(void)
 {
-	// LAB 4: Your code here.
 	//panic("fork not implemented");
 	set_pgfault_handler(pgfault);
 

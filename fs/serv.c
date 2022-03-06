@@ -216,7 +216,6 @@ serve_read(envid_t envid, union Fsipc *ipc)
 	if (debug)
 		cprintf("serve_read %08x %08x %08x\n", envid, req->req_fileid, req->req_n);
 
-	// Lab 5: Your code here:
 	if ((r = openfile_lookup(envid, req->req_fileid, &o)) < 0)
 		return r;
 
@@ -239,7 +238,6 @@ serve_write(envid_t envid, struct Fsreq_write *req)
 	if (debug)
 		cprintf("serve_write %08x %08x %08x\n", envid, req->req_fileid, req->req_n);
 
-	// LAB 5: Your code here.
 	//panic("serve_write not implemented");
 	struct OpenFile *o;
 	int r;

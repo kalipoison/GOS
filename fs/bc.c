@@ -47,7 +47,6 @@ bc_pgfault(struct UTrapframe *utf)
 	// Hint: first round addr to page boundary. fs/ide.c has code to read
 	// the disk.
 	//
-	// LAB 5: you code here:
 	if ((r = sys_page_alloc(0, ROUNDDOWN(addr, PGSIZE), PTE_SYSCALL)) < 0)
 		panic("allocating at %x in page fault handler: %e", addr, r);
 
@@ -83,7 +82,6 @@ flush_block(void *addr)
 	if (addr < (void*)DISKMAP || addr >= (void*)(DISKMAP + DISKSIZE))
 		panic("flush_block of bad va %08x", addr);
 
-	// LAB 5: Your code here.
 	//panic("flush_block not implemented");
 	if (!va_is_mapped(addr) || !va_is_dirty(addr)) {
 		return;

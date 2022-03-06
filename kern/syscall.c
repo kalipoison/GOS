@@ -23,7 +23,6 @@ sys_cputs(const char *s, size_t len)
 	// Check that the user has permission to read memory [s, s+len).
 	// Destroy the environment if not.
 
-	// LAB 3: Your code here.
 	user_mem_assert(curenv, s, len, 0);
 	// Print the string supplied by the user.
 	cprintf("%.*s", len, s);
@@ -81,7 +80,6 @@ sys_exofork(void)
 	// from the current environment -- but tweaked so sys_exofork
 	// will appear to return 0.
 
-	// LAB 4: Your code here.
 	//panic("sys_exofork not implemented");
 	struct Env* new_env;
 	int result;
@@ -114,7 +112,6 @@ sys_env_set_status(envid_t envid, int status)
 	// check whether the current environment has permission to set
 	// envid's status.
 
-	// LAB 4: Your code here.
 	//panic("sys_env_set_status not implemented");
 	struct Env* new_env;
 	int result;
@@ -140,7 +137,6 @@ sys_env_set_status(envid_t envid, int status)
 static int
 sys_env_set_trapframe(envid_t envid, struct Trapframe *tf)
 {
-	// LAB 5: Your code here.
 	// Remember to check whether the user has supplied us with a good
 	// address!
 	//panic("sys_env_set_trapframe not implemented");
@@ -174,7 +170,6 @@ sys_env_set_trapframe(envid_t envid, struct Trapframe *tf)
 static int
 sys_env_set_pgfault_upcall(envid_t envid, void *func)
 {
-	// LAB 4: Your code here.
 	//panic("sys_env_set_pgfault_upcall not implemented");
 	struct Env *e;
 	if (envid2env(envid, &e, 1)) return -E_BAD_ENV;
@@ -209,7 +204,6 @@ sys_page_alloc(envid_t envid, void *va, int perm)
 	//   If page_insert() fails, remember to free the page you
 	//   allocated!
 
-	// LAB 4: Your code here.
 	//panic("sys_page_alloc not implemented");
 	struct Env* new_env;
 	int result;
@@ -261,7 +255,6 @@ sys_page_map(envid_t srcenvid, void *srcva,
 	//   Use the third argument to page_lookup() to
 	//   check the current permissions on the page.
 
-	// LAB 4: Your code here.
 	//panic("sys_page_map not implemented");
 	struct Env* src_env;
 	struct Env* dst_env;
@@ -305,7 +298,6 @@ sys_page_unmap(envid_t envid, void *va)
 {
 	// Hint: This function is a wrapper around page_remove().
 
-	// LAB 4: Your code here.
 	//panic("sys_page_unmap not implemented");
 	struct Env* new_env;
 	int result;
@@ -361,7 +353,6 @@ sys_page_unmap(envid_t envid, void *va)
 static int
 sys_ipc_try_send(envid_t envid, uint32_t value, void *srcva, unsigned perm)
 {
-	// LAB 4: Your code here.
 	//panic("sys_ipc_try_send not implemented");
 	struct Env* new_env;
 	int result;
@@ -423,7 +414,6 @@ sys_ipc_try_send(envid_t envid, uint32_t value, void *srcva, unsigned perm)
 static int
 sys_ipc_recv(void *dstva)
 {
-	// LAB 4: Your code here.
 	//panic("sys_ipc_recv not implemented");
 	int result;
 	struct Env* cur_env = curenv;
@@ -449,7 +439,6 @@ sys_ipc_recv(void *dstva)
 static int
 sys_time_msec(void)
 {
-	// LAB 6: Your code here.
 	//panic("sys_time_msec not implemented");
 	return time_msec();
 }
@@ -472,7 +461,6 @@ syscall(uint32_t syscallno, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, 
 {
 	// Call the function corresponding to the 'syscallno' parameter.
 	// Return any appropriate return value.
-	// LAB 3: Your code here.
 
 	//panic("syscall not implemented");
 	

@@ -103,7 +103,6 @@ trap_init(void)
 {
 	extern struct Segdesc gdt[];
 
-	// LAB 3: Your code here.
         SETGATE(idt[T_DIVIDE], 0, GD_KT, divide_entry, 0);
         SETGATE(idt[T_DEBUG], 0, GD_KT, debug_entry, 0);
         SETGATE(idt[T_NMI], 0, GD_KT, nmi_entry, 0);
@@ -162,7 +161,6 @@ trap_init_percpu(void)
 	// wrong, you may not get a fault until you try to return from
 	// user space on that CPU.
 	//
-	// LAB 4: Your code here:
 	// Setup a TSS so that we get the right stack
 	// when we trap to the kernel.
 	thiscpu->cpu_ts.ts_esp0 = (uintptr_t)percpu_kstacks[cpunum()];
@@ -253,7 +251,6 @@ trap_dispatch(struct Trapframe *tf)
 {
 
 	// Handle processor exceptions.
-	// LAB 3: Your code here.
 	if (tf->tf_trapno == T_PGFLT){
 		page_fault_handler(tf);
 		return;
@@ -280,7 +277,6 @@ trap_dispatch(struct Trapframe *tf)
 
 	// Handle clock interrupts. Don't forget to acknowledge the
 	// interrupt using lapic_eoi() before calling the scheduler!
-	// LAB 4: Your code here.
 	if (tf->tf_trapno == IRQ_OFFSET + IRQ_TIMER) {
 		// lab4 exercise 14
 		lapic_eoi();
@@ -293,11 +289,9 @@ trap_dispatch(struct Trapframe *tf)
 	// Add time tick increment to clock interrupts.
 	// Be careful! In multiprocessors, clock interrupts are
 	// triggered on every CPU.
-	// LAB 6: Your code here.
 
 
 	// Handle keyboard and serial interrupts.
-	// LAB 5: Your code here.
 	if (tf->tf_trapno == IRQ_OFFSET + IRQ_KBD) {
 		kbd_intr();
 		return;
@@ -343,7 +337,6 @@ trap(struct Trapframe *tf)
 		// Trapped from user mode.
 		// Acquire the big kernel lock before doing any
 		// serious kernel work.
-		// LAB 4: Your code here.
 		lock_kernel();
 		assert(curenv);
 
@@ -389,7 +382,6 @@ page_fault_handler(struct Trapframe *tf)
 
 	// Handle kernel-mode page faults.
 
-	// LAB 3: Your code here.
 	if(tf->tf_cs && 0x01 == 0) {
 		panic("page_fault in kernel mode, fault address %d\n", fault_va);
 	}
@@ -425,7 +417,6 @@ page_fault_handler(struct Trapframe *tf)
 	//   To change what the user environment runs, modify 'curenv->env_tf'
 	//   (the 'tf' variable points at 'curenv->env_tf').
 
-	// LAB 4: Your code here.
 	if (curenv->env_pgfault_upcall) {
 		struct UTrapframe *utf;
 		if (tf->tf_esp >= UXSTACKTOP-PGSIZE && tf->tf_esp <= UXSTACKTOP-1) {

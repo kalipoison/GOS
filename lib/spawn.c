@@ -301,7 +301,6 @@ map_segment(envid_t child, uintptr_t va, size_t memsz,
 static int
 copy_shared_pages(envid_t child)
 {
-	// LAB 5: Your code here.
 	extern unsigned char end[];
 	int r;
 	uint8_t *addr = (uint8_t *)UTEXT;//(uint8_t *)ROUNDDOWN((uint8_t *)end, PGSIZE);

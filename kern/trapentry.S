@@ -44,9 +44,6 @@
 
 .text
 
-/*
- * Lab 3: Your code here for generating entry points for the different traps.
- */
 TRAPHANDLER_NOEC(divide_entry, T_DIVIDE);
 TRAPHANDLER_NOEC(debug_entry, T_DEBUG);
 TRAPHANDLER_NOEC(nmi_entry, T_NMI);
@@ -76,9 +73,6 @@ TRAPHANDLER_NOEC(handler39, IRQ_OFFSET + IRQ_SPURIOUS)
 TRAPHANDLER_NOEC(handler46, IRQ_OFFSET + IRQ_IDE)
 TRAPHANDLER_NOEC(handler51, IRQ_OFFSET + IRQ_ERROR)
 
-/*
- * Lab 3: Your code here for _alltraps
- */
 _alltraps:
         pushl %ds
         pushl %es

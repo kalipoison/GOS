@@ -61,7 +61,6 @@ alloc_block(void)
 	// contains the in-use bits for BLKBITSIZE blocks.  There are
 	// super->s_nblocks blocks in the disk altogether.
 
-	// LAB 5: Your code here.
 	//panic("alloc_block not implemented");
 	for (size_t i = 0; i < super->s_nblocks/32; i++){
 		if (bitmap[i]) {
@@ -147,7 +146,6 @@ fs_init(void)
 static int
 file_block_walk(struct File *f, uint32_t filebno, uint32_t **ppdiskbno, bool alloc)
 {
-	// LAB 5: Your code here.
 	//panic("file_block_walk not implemented");
 	if (filebno >= NDIRECT + NINDIRECT) {
 		return -E_INVAL;
@@ -195,7 +193,6 @@ file_block_walk(struct File *f, uint32_t filebno, uint32_t **ppdiskbno, bool all
 int
 file_get_block(struct File *f, uint32_t filebno, char **blk)
 {
-	// LAB 5: Your code here.
 	//panic("file_get_block not implemented");
 	int r;
 	uint32_t *ppdiskbno;

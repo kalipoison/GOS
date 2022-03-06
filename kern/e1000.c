@@ -2,7 +2,6 @@
 #include <kern/pmap.h>
 #include <inc/string.h>
 
-// LAB 6: Your driver code here
 volatile void *bar_va;
 #define E1000REG(offset) (void *)(bar_va + offset)
 
